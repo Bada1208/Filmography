@@ -1,36 +1,27 @@
 package com.sysoiev.controller;
 
 import com.sysoiev.model.Film;
+import com.sysoiev.service.FilmService;
+import com.sysoiev.service.FilmServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class FilmController {
-    private static Film film;
+    private FilmService filmService = new FilmServiceImpl();
 
-    static {
-        film = new Film();
-        film.setTitle("Inception");
-        film.setYear(2010);
-        film.setGenre("sci-fi");
-        film.setWatched(true);
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView allFilms() {
+        List<Film> films = filmService.allFilms();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("films");
-        modelAndView.addObject("film", film);
+        modelAndView.addObject("filmsList", films);
         return modelAndView;
-    }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView editPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("editPage");
-        return modelAndView;
-    }
 
+    }
 }
