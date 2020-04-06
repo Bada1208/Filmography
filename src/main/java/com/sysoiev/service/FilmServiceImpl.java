@@ -1,13 +1,20 @@
 package com.sysoiev.service;
 
 import com.sysoiev.dao.FilmDAO;
-import com.sysoiev.dao.FilmDAOImpl;
 import com.sysoiev.model.Film;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FilmServiceImpl implements FilmService {
-    private FilmDAO filmDAO = new FilmDAOImpl();
+    private FilmDAO filmDAO;
+
+    @Autowired
+    public void setFilmDAO(FilmDAO filmDAO) {
+        this.filmDAO = filmDAO;
+    }
 
     @Override
     public List<Film> allFilms() {

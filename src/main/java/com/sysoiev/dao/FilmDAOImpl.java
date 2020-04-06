@@ -1,10 +1,12 @@
 package com.sysoiev.dao;
 
 import com.sysoiev.model.Film;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class FilmDAOImpl implements FilmDAO {
     private static final AtomicInteger AUTO_ID = new AtomicInteger(0);
     private static Map<Integer, Film> films = new HashMap<>();
